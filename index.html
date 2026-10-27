@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>นักสำรวจระบบนิเวศ | วิทยาศาสตร์ ม.3</title>
+<style>
+:root{--ink:#24433b;--green:#2e8b67;--mint:#e8f8ef;--cream:#fffaf0;--pink:#ffdfeb;--yellow:#ffe9a8;--blue:#dff4ff}
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,"Noto Sans Thai",sans-serif;color:var(--ink);background:linear-gradient(135deg,#e8fff1,#fff7e4 55%,#e7f6ff);line-height:1.55}
+main{max-width:1100px;margin:auto;padding:22px}.hero{border-radius:26px;padding:26px;background:linear-gradient(120deg,#218c68,#79c987);color:white;box-shadow:0 10px 28px #28664a22;position:relative;overflow:hidden}.hero:after{content:"🌿 🦋 ☀️";position:absolute;right:20px;bottom:8px;font-size:38px;opacity:.9}.hero h1{margin:0 0 6px;font-size:clamp(25px,4vw,38px)}.hero p{margin:0;max-width:720px}.tag{display:inline-block;background:#ffffff33;border:1px solid #ffffff66;padding:4px 12px;border-radius:20px;margin-bottom:9px;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.panel{background:#ffffffdd;border:1px solid #d7ecdf;border-radius:22px;padding:20px;box-shadow:0 7px 20px #275b4010}.panel h2{margin:0 0 12px;font-size:21px}.ecosystem{grid-column:1/-1}.scene{height:300px;border-radius:18px;overflow:hidden;background:linear-gradient(#a9e5ff 0%,#e5f8ff 55%,#c8ed9c 56%,#81c96f 100%);position:relative;border:2px solid #d2e9c9}.sun{position:absolute;right:9%;top:8%;font-size:44px;filter:drop-shadow(0 0 10px #ffe9a8)}.cloud{position:absolute;top:10%;left:8%;font-size:42px;animation:drift 8s ease-in-out infinite alternate}.pond{position:absolute;bottom:0;left:37%;width:35%;height:32%;background:#75d5e8;border-radius:50% 50% 0 0;opacity:.95}.grass{position:absolute;bottom:0;width:100%;height:20%;background:#5cb85c}.tree{position:absolute;bottom:15%;left:12%;font-size:80px;transform-origin:bottom;animation:sway 3s ease-in-out infinite alternate}.flower{position:absolute;bottom:17%;left:27%;font-size:35px}.rabbit{position:absolute;bottom:11%;left:var(--rabbit-x,65%);font-size:42px;transition:left .25s}.butterfly{position:absolute;left:var(--butterfly-x,52%);top:35%;font-size:30px;transition:left .25s,top .25s;animation:flap 1s ease-in-out infinite alternate}.fish{position:absolute;bottom:10%;left:var(--fish-x,52%);font-size:28px;transition:left .25s}.label{position:absolute;background:#ffffffd9;padding:4px 9px;border-radius:10px;font-size:12px;font-weight:bold}.label1{left:8px;top:8px}.label2{right:8px;bottom:8px}@keyframes sway{to{transform:rotate(4deg)}}@keyframes drift{to{transform:translateX(45px)}}@keyframes flap{to{transform:translateY(-10px) rotate(12deg)}}.controls{display:flex;flex-direction:column;gap:18px}.control label{display:flex;justify-content:space-between;gap:10px;font-weight:bold}.control input{width:100%;accent-color:var(--green);margin:12px 0 3px}.hint{font-size:13px;color:#55746a;margin:0}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.stat{padding:12px;border-radius:14px;text-align:center;background:var(--mint)}.stat:nth-child(2){background:var(--yellow)}.stat:nth-child(3){background:var(--pink)}.stat strong{display:block;font-size:24px}.chart-wrap{height:220px;position:relative}.chart-wrap canvas{width:100%;height:100%;display:block}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}.question{padding:14px;border-radius:15px;background:#f4fbf6;margin:12px 0}.question p{font-weight:bold;margin:0 0 8px}.question label{display:block;padding:5px 0;cursor:pointer}.question button{margin-top:8px}.btn{border:0;border-radius:12px;background:var(--green);color:white;padding:10px 15px;font-weight:bold;cursor:pointer}.btn:hover{filter:brightness(.95)}.answer{display:none;padding:10px;border-radius:12px;background:#e6f8e9;margin-top:8px}.answer.show{display:block}.result{font-weight:bold;margin-top:12px}.footer{text-align:center;font-size:12px;color:#668176;padding:20px}
+@media(max-width:760px){main{padding:12px}.grid{grid-template-columns:1fr}.ecosystem{grid-column:auto}.scene{height:250px}.statgrid{grid-template-columns:1fr 1fr 1fr}.panel{padding:16px}.hero:after{font-size:25px;right:10px}}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+<div class="tag">🔬 วิทยาศาสตร์ • ชั้นมัธยมศึกษาปีที่ 3</div>
+<h1>🌱 นักสำรวจระบบนิเวศจิ๋ว</h1>
+<p>ลองปรับจำนวนพืชและปริมาณน้ำ แล้วสังเกตว่าผู้ผลิตและผู้บริโภคในระบบนิเวศเปลี่ยนแปลงอย่างไร กราฟและภาพจำลองจะอัปเดตทันที!</p>
+</header>
+<div class="grid">
+<section class="panel ecosystem">
+<h2>🌳 โลกใบเล็กของเรา</h2>
+<div class="scene" id="scene" style="--rabbit-x:65%;--butterfly-x:52%;--fish-x:52%">
+<div class="cloud">☁️</div><div class="sun">☀️</div>
+<div class="pond"></div><div class="grass"></div>
+<div class="tree" id="tree">🌳</div><div class="flower" id="flower">🌼</div>
+<div class="rabbit" id="rabbit">🐇</div><div class="butterfly" id="butterfly">🦋</div><div class="fish" id="fish">🐟</div>
+<div class="label label1" id="weatherLabel">☀️ สภาพแวดล้อมเหมาะสม</div><div class="label label2" id="sceneLabel">ระบบนิเวศสมดุล 🌿</div>
+</div>
+<div class="statgrid">
+<div class="stat"><span>🌿 พืช (ผู้ผลิต)</span><strong id="plantStat">70</strong><small>หน่วยจำลอง</small></div>
+<div class="stat"><span>🐇 กระต่าย</span><strong id="rabbitStat">35</strong><small>หน่วยจำลอง</small></div>
+<div class="stat"><span>💧 น้ำ</span><strong id="waterStat">70%</strong><small>ความพร้อม</small></div>
+</div>
+</section>
+<section class="panel">
+<h2>🎛️ ปรับตัวแปรทดลอง</h2>
+<div class="controls">
+<div class="control">
+<label for="plants"><span>🌿 ปริมาณพืช</span><span><b id="plantsValue">70</b>%</span></label>
+<input id="plants" type="range" min="10" max="100" value="70" step="5">
+<p class="hint">พืชเป็นผู้ผลิตและเป็นแหล่งอาหารของสัตว์กินพืช</p>
+</div>
+<div class="control">
+<label for="water"><span>💧 ปริมาณน้ำ</span><span><b id="waterValue">70</b>%</span></label>
+<input id="water" type="range" min="10" max="100" value="70" step="5">
+<p class="hint">น้ำจำเป็นต่อการเจริญเติบโตของพืชและการดำรงชีวิตของสิ่งมีชีวิต</p>
+</div>
+</div>
+<h2 style="margin-top:22px">🔎 ผลที่สังเกตได้</h2>
+<p id="analysis">พืชเติบโตได้ดี มีอาหารเพียงพอ ประชากรกระต่ายอยู่ในระดับเหมาะสม</p>
+<ul>
+<li>ผู้ผลิต: พืช 🌿</li><li>ผู้บริโภค: กระต่ายและปลา 🐇🐟</li><li>ปัจจัยไม่มีชีวิต: น้ำ แสงแดด และอากาศ ☀️💧</li>
+</ul>
+</section>
+<section class="panel">
+<h2>📈 กราฟประชากรจำลองแบบ Real-time</h2>
+<p class="hint">ค่าประชากรเป็นแบบจำลองเพื่อการเรียนรู้ ไม่ใช่ข้อมูลจากธรรมชาติจริง</p>
+<div class="legend"><span><i class="dot" style="background:#2e8b67"></i>พืช</span><span><i class="dot" style="background:#e59b35"></i>กระต่าย</span><span><i class="dot" style="background:#4299d1"></i>ปลา</span></div>
+<div class="chart-wrap"><canvas id="chart" aria-label="กราฟเปรียบเทียบประชากรพืช กระต่าย และปลา"></canvas></div>
+<p class="hint">แกนนอน: กลุ่มสิ่งมีชีวิต • แกนตั้ง: ดัชนีประชากร 0–100</p>
+</section>
+<section class="panel">
+<h2>🧠 คำถามท้ายกิจกรรม (3 ข้อ)</h2>
+<p class="hint">เลือกคำตอบ แล้วกด “ตรวจคำตอบ” เพื่อดูคะแนนและเฉลย</p>
+<form id="quiz">
+<div class="question"><p>1. สิ่งมีชีวิตใดเป็นผู้ผลิตในระบบนิเวศนี้?</p>
+<label><input type="radio" name="q1" value="a"> กระต่าย</label><label><input type="radio" name="q1" value="b"> พืช</label><label><input type="radio" name="q1" value="c"> ปลา</label><div class="answer" id="a1">เฉลย: พืช เพราะสร้างอาหารเองได้โดยใช้พลังงานแสง</div></div>
+<div class="question"><p>2. หากปริมาณน้ำลดลงมาก คาดว่าจะเกิดผลใดก่อน?</p>
+<label><input type="radio" name="q2" value="a"> พืชอาจเจริญเติบโตลดลง</label><label><input type="radio" name="q2" value="b"> พืชมีจำนวนเพิ่มขึ้นทันที</label><label><input type="radio" name="q2" value="c"> ไม่มีสิ่งมีชีวิตได้รับผลกระทบ</label><div class="answer" id="a2">เฉลย: พืชอาจเจริญเติบโตลดลง เพราะน้ำเป็นปัจจัยสำคัญต่อการดำรงชีวิต</div></div>
+<div class="question"><p>3. ถ้าพืชลดลงมาก กระต่ายมีแนวโน้มเป็นอย่างไร?</p>
+<label><input type="radio" name="q3" value="a"> มีอาหารมากขึ้น</label><label><input type="radio" name="q3" value="b"> ไม่เปลี่ยนแปลงเสมอไป</label><label><input type="radio" name="q3" value="c"> อาจลดจำนวนลงเพราะอาหารขาดแคลน</label><div class="answer" id="a3">เฉลย: อาจลดจำนวนลง เพราะกระต่ายพึ่งพาพืชเป็นแหล่งอาหาร</div></div>
+<button type="submit" class="btn">ตรวจคำตอบ ✓</button>
+<button type="button" class="btn" id="reset" style="background:#6b8f82">เริ่มทำใหม่</button>
+<div id="result" class="result" aria-live="polite"></div>
+</form>
+</section>
+</div>
+<div class="footer">กิจกรรมจำลองเพื่อการเรียนรู้ • ทดลองปรับตัวแปรทีละอย่าง แล้วบันทึกผลที่สังเกตได้ 🌼</div>
+</main>
+<script>
+const plants=document.getElementById('plants'), water=document.getElementById('water');
+const canvas=document.getElementById('chart'), ctx=canvas.getContext('2d');
+function model(){
+ const p=+plants.value,w=+water.value;
+ const plant=Math.round(p*(0.35+0.65*w/100));
+ const rabbit=Math.round(Math.min(100,plant*0.62+8));
+ const fish=Math.round(Math.min(100,w*0.72+10));
+ return {p,w,plant,rabbit,fish};
+}
+function drawChart(m){
+ const dpr=window.devicePixelRatio||1, rect=canvas.getBoundingClientRect();
+ canvas.width=Math.max(300,rect.width)*dpr; canvas.height=rect.height*dpr;
+ ctx.setTransform(dpr,0,0,dpr,0,0);
+ const width=canvas.width/dpr,height=canvas.height/dpr;
+ const left=34,right=12,top=12,bottom=30, plotH=height-top-bottom,plotW=width-left-right;
+ ctx.clearRect(0,0,width,height);ctx.font='11px Tahoma';ctx.strokeStyle='#dcebe2';ctx.fillStyle='#638074';ctx.lineWidth=1;
+ for(let v=0;v<=100;v+=25){let y=top+plotH*(1-v/100);ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(width-right,y);ctx.stroke();ctx.fillText(v,left-25,y+4)}
+ const values=[m.plant,m.rabbit,m.fish],colors=['#2e8b67','#e59b35','#4299d1'],names=['พืช','กระต่าย','ปลา'];
+ const slot=plotW/3,bw=Math.min(42,slot*.55);
+ values.forEach((v,i)=>{const x=left+slot*i+(slot-bw)/2,h=plotH*v/100,y=top+plotH-h;ctx.fillStyle=colors[i];ctx.beginPath();ctx.roundRect(x,y,bw,h,7);ctx.fill();ctx.fillStyle='#24433b';ctx.textAlign='center';ctx.font='bold 12px Tahoma';ctx.fillText(v,x+bw/2,y-5);ctx.font='11px Tahoma';ctx.fillText(names[i],x+bw/2,height-9)});
+}
+function update(){
+ const m=model();
+ document.getElementById('plantsValue').textContent=m.p;
+ document.getElementById('waterValue').textContent=m.w;
+ document.getElementById('plantStat').textContent=m.plant;
+ document.getElementById('rabbitStat').textContent=m.rabbit;
+ document.getElementById('waterStat').textContent=m.w+'%';
+ document.getElementById('tree').style.transform=`scale(${0.65+m.plant/180})`;
+ document.getElementById('flower').style.opacity=0.25+m.plant/135;
+ document.getElementById('rabbit').style.setProperty('left',(45+m.rabbit*.35)+'%');
+ document.getElementById('butterfly').style.setProperty('left',(20+m.plant*.55)+'%');
+ document.getElementById('fish').style.setProperty('left',(38+m.w*.35)+'%');
+ let status,desc,weather;
+ if(m.w<30){status='น้ำขาดแคลน 💧';weather='🌵 แห้งแล้ง';desc='น้ำมีน้อย พืชเติบโตได้จำกัด และสัตว์อาจหาอาหารหรือน้ำได้ยาก';}
+ else if(m.plant<30){status='อาหารเริ่มขาด 🌱';weather='☀️ พืชน้อย';desc='พืชมีน้อย กระต่ายอาจมีอาหารไม่เพียงพอและจำนวนประชากรมีแนวโน้มลดลง';}
+ else if(m.plant>65&&m.w>55){status='ระบบค่อนข้างสมดุล 🌿';weather='☀️ สภาพเหมาะสม';desc='พืชเติบโตได้ดี มีแหล่งอาหารมากขึ้น และประชากรผู้บริโภคมีแนวโน้มเพิ่มตาม';}
+ else {status='ระบบกำลังเปลี่ยนแปลง 🍃';weather='🌤️ เฝ้าสังเกต';desc='การเปลี่ยนแปลงของน้ำส่งผลต่อพืช และส่งต่อไปยังสัตว์ที่พึ่งพาพืชเป็นอาหาร';}
+ document.getElementById('sceneLabel').textContent=status;
+ document.getElementById('weatherLabel').textContent=weather;
+ document.getElementById('analysis').textContent=desc;
+ drawChart(m);
+}
+plants.addEventListener('input',update);water.addEventListener('input',update);
+window.addEventListener('resize',update);
+document.getElementById('quiz').addEventListener('submit',e=>{
+ e.preventDefault();let score=0;const correct={q1:'b',q2:'a',q3:'c'};
+ Object.entries(correct).forEach(([q,a],i)=>{const chosen=document.querySelector(`input[name="${q}"]:checked`);if(chosen&&chosen.value===a)score++;document.getElementById('a'+(i+1)).classList.add('show')});
+ document.getElementById('result').textContent=`ได้ ${score}/3 คะแนน — ${score===3?'ยอดเยี่ยม! นักสำรวจระบบนิเวศเก่งมาก':score===2?'ดีมาก ลองทบทวนข้อที่พลาดอีกนิด':'ลองอ่านเฉลยและทำความเข้าใจ แล้วทำใหม่ได้เลย'}`;
+});
+document.getElementById('reset').addEventListener('click',()=>{document.getElementById('quiz').reset();document.querySelectorAll('.answer').forEach(x=>x.classList.remove('show'));document.getElementById('result').textContent='';});
+update();
+</script>
+</body>
+</html>
